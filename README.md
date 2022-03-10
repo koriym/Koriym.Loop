@@ -34,8 +34,8 @@ Loop information is obtained from the array keys.
 /** @var Loop $loop */
 foreach ($users as $loop => $user) {
     echo match(true) {
-        $loop->isFirst => "<ur><li>{$user->name}",
-        $loop->isLast => "<li>{$user->name}</li>",
+        $loop->isFirst => "<ul><li>{$user->name}",
+        $loop->isLast => "<li>{$user->name}</ul>",
         default => "<li>{$user->name}"
     };
 }
