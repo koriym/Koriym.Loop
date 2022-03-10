@@ -1,4 +1,4 @@
-# Koriym.ResultSet
+# Koriym.Loop
 
 Generates an entity list from a database result set.
 
@@ -22,7 +22,7 @@ $resultSet = [
 ];
 
 /** @var list<User> $userList */
-$users = (new ListGen)($resultSet, User::class);
+$users = (new LoopGen)($resultSet, User::class);
 foreach ($users as $user) {
     echo $user->name;
 }
@@ -34,6 +34,7 @@ Loop information is obtained from the array keys.
 /** @var Loop $loop */
 foreach ($users as $loop => $user) {
     echo match(true) {
+        $loop->isFirst && $loop->isLast => "<ul><li>{$user->name}</ul>",
         $loop->isFirst => "<ul><li>{$user->name}",
         $loop->isLast => "<li>{$user->name}</ul>",
         default => "<li>{$user->name}"
@@ -58,6 +59,6 @@ Specify the key as the name of the parameter and the value as the instance.
 $dependencies = [
     $varName => $insntance
 ];
-$users = (new ListGen)($resultSet, User::class, $dependencies);
+$users = (new LoopGen)($resultSet, User::class, $dependencies);
 ```
 

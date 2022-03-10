@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Koriym\ResultSet;
+namespace Koriym\Loop;
 
 use DateTime;
 use PHPUnit\Framework\TestCase;
 
 use function assert;
 
-class ListGenTest extends TestCase
+class LoopGenTest extends TestCase
 {
     /** @var array<array<scalar>> */
     protected $resultSet;
@@ -25,8 +25,8 @@ class ListGenTest extends TestCase
 
     public function testInvoke(): void
     {
-        /** @var ListGen<FakeUser> $list */
-        $list = (new ListGen())($this->resultSet, FakeUser::class);
+        /** @var LoopGen<FakeUser> $list */
+        $list = (new LoopGen())($this->resultSet, FakeUser::class);
         foreach ($list as $loop => $user) {
             /** @var Loop $loop */
             $this->assertInstanceOf(Loop::class, $loop);
@@ -39,7 +39,7 @@ class ListGenTest extends TestCase
 
     public function testEmptyList()
     {
-        $list =  (new ListGen())([], FakeUser::class);
+        $list =  (new LoopGen())([], FakeUser::class);
         $item = null;
         foreach ($list as $loop => $item) {
             assert($item instanceof FakeUser);
@@ -50,7 +50,7 @@ class ListGenTest extends TestCase
 
     public function testSingleItem()
     {
-        $list =  (new ListGen())([['id' => 1, 'name' => 'ray']], FakeUser::class);
+        $list =  (new LoopGen())([['id' => 1, 'name' => 'ray']], FakeUser::class);
         foreach ($list as $loop => $item) {
             $this->assertInstanceOf(Loop::class, $loop);
         }
@@ -61,7 +61,7 @@ class ListGenTest extends TestCase
 
     public function testExtraParams(): void
     {
-        $list = (new ListGen())(
+        $list = (new LoopGen())(
             $this->resultSet,
             FakeUser::class ,
             ['date' => new DateTime('now')]

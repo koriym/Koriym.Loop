@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Koriym\ResultSet;
+namespace Koriym\Loop;
 
 /**
  * @psalm-immutable

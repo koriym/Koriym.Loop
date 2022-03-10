@@ -5,7 +5,7 @@
     bootstrap="vendor/autoload.php"
 >
     <testsuites>
-        <testsuite name="Koriym.ResultSet test suite">
+        <testsuite name="Koriym.Loop test suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

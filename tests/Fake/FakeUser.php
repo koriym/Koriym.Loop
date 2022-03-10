@@ -1,6 +1,6 @@
 <?php
 
-namespace Koriym\ResultSet;
+namespace Koriym\Loop;
 
 use DateTime;
 use DateTimeImmutable;

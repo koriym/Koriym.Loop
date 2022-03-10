@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Koriym\ResultSet;
+namespace Koriym\Loop;
 
 use Generator;
 
@@ -12,7 +12,7 @@ use function next;
 /**
  * @template T of object
  */
-final class ListGen
+final class LoopGen
 {
     // phpcs:disable
     /**
