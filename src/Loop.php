@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Koriym\ResultSet;
 
+/**
+ * @psalm-immutable
+ */
 final class Loop
 {
     /** @var bool */
