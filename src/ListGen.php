@@ -14,9 +14,11 @@ use function next;
  */
 final class ListGen
 {
+    // phpcs:disable
     /**
      * @param array<array<string, mixed>>  $elements
      * @param class-string<T>              $entity
+     * @param array<string, mixed>         $extraParams
      * @param callable(class-string, mixed...):T $factory
      *
      * @return Generator<Loop, T, mixed, void>
@@ -24,8 +26,10 @@ final class ListGen
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     public function __invoke(
+        // phpcs:enable
         array $elements,
         string $entity,
+        array $extraParams = [],
         ?callable $factory = null
     ): Generator {
         if ($elements === []) {
@@ -34,7 +38,7 @@ final class ListGen
 
         $factory = $factory ?? [$this, 'newEntity'];
         $iteration = 0;
-        $current = current($elements);
+        $current = current($elements) + $extraParams;
         $next = next($elements);
         $loop = $next ? new Loop(true, false, $iteration) : new Loop(true, true, $iteration);
 
@@ -47,7 +51,7 @@ final class ListGen
 
         while (true) {
             $iteration++;
-            $current = $next;
+            $current = $next + $extraParams;
             $next = next($elements);
             if ($next === false) {
                 yield new Loop(false, true, $iteration) => $factory($entity, ...$current);

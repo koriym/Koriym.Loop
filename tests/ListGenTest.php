@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Koriym\ResultSet;
 
+use DateTime;
 use PHPUnit\Framework\TestCase;
 
 use function assert;
@@ -56,5 +57,17 @@ class ListGenTest extends TestCase
 
         $this->assertTrue($loop->isFirst);
         $this->assertTrue($loop->isLast);
+    }
+
+    public function testExtraParams(): void
+    {
+        $list = (new ListGen())(
+            $this->resultSet,
+            FakeUser::class ,
+            ['date' => new DateTime('now')]
+        );
+        foreach ($list as $loop => $item) {
+            $this->assertInstanceOf(\DateTimeInterface::class, $item->date);
+        }
     }
 }
