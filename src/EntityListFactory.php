@@ -16,7 +16,7 @@ use function is_string;
 /**
  * @template T of object
  */
-final class RowListFactory implements RowListInterface
+final class EntityListFactory implements EntityListInterface
 {
     /** @var iterable<array<scalar>> */
     private $elements;

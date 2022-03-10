@@ -10,23 +10,25 @@ final class ResultSet
      * @param array<array<scalar>> $resultSetList
      * @param class-string<T>      $entityClass
      *
-     * @return RowList<T>
+     * @return EntityList<T>
+     *
      * @template T of object
      */
-    public static function rowList(array $resultSetList, string $entityClass): iterable
+    public static function entityList(array $resultSetList, string $entityClass): iterable
     {
-        return new RowList($resultSetList, $entityClass);
+        return new EntityList($resultSetList, $entityClass);
     }
 
     /**
      * @param array<array<scalar>> $resultSetList
      * @param callable(scalar      ...$scalar):T  $factory
      *
-     * @return RowListFactory<T>
+     * @return EntityListFactory<T>
+     *
      * @template T of object
      */
     public static function rowListFactory(array $resultSetList, callable $factory): iterable
     {
-        return new RowListFactory($resultSetList, $factory);
+        return new EntityListFactory($resultSetList, $factory);
     }
 }

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Koriym\ResultSet;
 
 use Generator;
-
 use LogicException;
+
 use function assert;
 use function class_exists;
 use function count;
@@ -17,7 +17,7 @@ use function is_string;
 /**
  * @template T of object
  */
-final class RowList implements RowListInterface
+final class EntityList implements EntityListInterface
 {
     /** @var iterable<array<scalar>> */
     private $elements;

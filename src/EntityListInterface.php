@@ -10,6 +10,6 @@ use IteratorAggregate;
 /**
  * @extends IteratorAggregate<array-key, object>
  */
-interface RowListInterface extends IteratorAggregate, Countable
+interface EntityListInterface extends IteratorAggregate, Countable
 {
 }

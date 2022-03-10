@@ -24,8 +24,8 @@ class ResultSetTest extends TestCase
 
     public function testRowList(): void
     {
-        /** @var RowList<FakeUser> $rowList */
-        $rowList = ResultSet::rowList($this->resultSet, FakeUser::class);
+        /** @var EntityList<FakeUser> $rowList */
+        $rowList = ResultSet::entityList($this->resultSet, FakeUser::class);
         $this->assertContainsOnlyInstancesOf(FakeUser::class, $rowList);
         $this->assertSame(3, count($rowList));
     }
