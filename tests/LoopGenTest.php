@@ -26,13 +26,19 @@ class LoopGenTest extends TestCase
     public function testInvoke(): void
     {
         /** @var LoopGen<FakeUser> $list */
+        $index = [];
+        $iteration = [];
         $list = (new LoopGen())($this->resultSet, FakeUser::class);
         foreach ($list as $loop => $user) {
             /** @var Loop $loop */
+            $indexList[] = $loop->index;
+            $iterationList[] = $loop->iteration;
             $this->assertInstanceOf(Loop::class, $loop);
             $this->assertInstanceOf(FakeUser::class, $user); // Not by assertContainsOnlyInstancesOf because for the debugging
         }
 
+        $this->assertSame([0, 1, 2], $indexList);
+        $this->assertSame([1, 2, 3], $iterationList);
         $this->assertFalse($loop->isFirst);
         $this->assertTrue($loop->isLast);
     }

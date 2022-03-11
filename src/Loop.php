@@ -16,7 +16,7 @@ final class Loop
     public $isLast;
 
     /** @var int  */
-    private $index;
+    public $index;
 
     /** @var int */
     public $iteration;
