@@ -48,8 +48,8 @@ foreach ($users as $loop => $user) {
 | --------- | ---- | ---------------------- |
 | isFirst   | bool | Is first on the list?  |
 | isLast    | bool | Is last on the list?   |
-| index     | Int  | Loop count of 0 origin |
-| iteration | Int  | Loop count of 1 origin |
+| index     | int  | Loop count of 0 origin |
+| iteration | int  | Loop count of 1 origin |
 
 ## Injection
 
