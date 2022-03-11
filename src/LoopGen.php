@@ -43,7 +43,7 @@ final class LoopGen
         $loop = $next ? new Loop(true, false, $index) : new Loop(true, true, $index);
 
         // first loop
-        yield $loop => $factory($entity, ...$current);
+        yield $loop => $factory($entity, $current);
 
         if (! $next) {
             return;
@@ -54,25 +54,28 @@ final class LoopGen
             $current = $next + $extraParams;
             $next = next($elements);
             if ($next === false) {
-                yield new Loop(false, true, $index) => $factory($entity, ...$current);
+                yield new Loop(false, true, $index) => $factory($entity, $current);
 
                 return;
             }
 
-            yield new Loop(false, false, $index) => $factory($entity, ...$current);
+            yield new Loop(false, false, $index) => $factory($entity, $current);
         }
     }
 
     /**
      * @param class-string<T> $entity
-     * @param mixed           ...$elements
+     * @param array<string, mixed> $elements
      *
      * @return T
      *
      * @psalm-suppress MixedMethodCall
      */
-    private function newEntity(string $entity, ...$elements)
+    private function newEntity(string $entity, $elements)
     {
+        if (PHP_MAJOR_VERSION < 8) {
+            $elements = array_values($elements);
+        }
         return new $entity(...$elements);
     }
 }
