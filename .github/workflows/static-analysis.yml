@@ -88,4 +88,4 @@ jobs:
         run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Run PHP Mess Detector
-        run: ./vendor/bin/phpmd src/di text ./phpmd.xml
+        run: ./vendor/bin/phpmd src text ./phpmd.xml
