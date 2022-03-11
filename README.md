@@ -1,8 +1,8 @@
 # Koriym.Loop
 
-Generates an entity list from a database result set.
+Converts database result sets into an entity list generator that is handy to use in views.
 
-The resulting list can be iterated with information provided such as `isFirst`, `isLast`, etc. It provides similar functionality for native PHP as the loop processing provided by template engines such as Smarty and Twig.
+The entity list can be iterated with information provided such as `isFirst`, `isLast`, etc. It provides similar functionality for native PHP as the loop processing provided by template engines such as Smarty and Twig.
 
 ## Usage
 
@@ -48,8 +48,8 @@ foreach ($users as $loop => $user) {
 | --------- | ---- | ---------------------- |
 | isFirst   | bool | Is first on the list?  |
 | isLast    | bool | Is last on the list?   |
-| index     | Int  | Loop count of 0 origin |
-| iteration | Int  | Loop count of 1 origin |
+| index     | int  | Loop count of 0 origin |
+| iteration | int  | Loop count of 1 origin |
 
 ## Injection
 
