@@ -6,8 +6,11 @@ namespace Koriym\Loop;
 
 use Generator;
 
+use function array_values;
 use function current;
 use function next;
+
+use const PHP_MAJOR_VERSION;
 
 /**
  * @template T of object
@@ -64,18 +67,19 @@ final class LoopGen
     }
 
     /**
-     * @param class-string<T> $entity
+     * @param class-string<T>      $entity
      * @param array<string, mixed> $elements
      *
      * @return T
      *
      * @psalm-suppress MixedMethodCall
      */
-    private function newEntity(string $entity, $elements)
+    private function newEntity(string $entity, array $elements)
     {
         if (PHP_MAJOR_VERSION < 8) {
             $elements = array_values($elements);
         }
+
         return new $entity(...$elements);
     }
 }

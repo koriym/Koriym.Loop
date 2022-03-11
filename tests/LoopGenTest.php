@@ -63,11 +63,11 @@ class LoopGenTest extends TestCase
     {
         $list = (new LoopGen())(
             $this->resultSet,
-            FakeUser::class ,
+            FakeUser::class,
             ['date' => new DateTime('now')]
         );
         foreach ($list as $loop => $item) {
-            $this->assertInstanceOf(\DateTimeInterface::class, $item->date);
+            $this->assertInstanceOf(DateTime::class, $item->date);
         }
     }
 }
