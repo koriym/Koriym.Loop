@@ -73,6 +73,7 @@ final class LoopGen
      * @return T
      *
      * @psalm-suppress MixedMethodCall
+     * @SuppressWarnings("UnusedPrivateMethod")
      */
     private function newEntity(string $entity, array $elements)
     {
