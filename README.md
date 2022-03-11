@@ -46,9 +46,10 @@ foreach ($users as $loop => $user) {
 
 | property  | type | Description            |
 | --------- | ---- | ---------------------- |
-| isFirst   | bool | First on the list?     |
-| isLast    | bool | Last on the list?      |
-| iteration | Int  | Loop count of 0 origin |
+| isFirst   | bool | Is first on the list?  |
+| isLast    | bool | Is last on the list?   |
+| index     | Int  | Loop count of 0 origin |
+| iteration | Int  | Loop count of 1 origin |
 
 ## Injection
 

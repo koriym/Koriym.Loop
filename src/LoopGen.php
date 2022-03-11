@@ -37,10 +37,10 @@ final class LoopGen
         }
 
         $factory = $factory ?? [$this, 'newEntity'];
-        $iteration = 0;
+        $index = 0;
         $current = current($elements) + $extraParams;
         $next = next($elements);
-        $loop = $next ? new Loop(true, false, $iteration) : new Loop(true, true, $iteration);
+        $loop = $next ? new Loop(true, false, $index) : new Loop(true, true, $index);
 
         // first loop
         yield $loop => $factory($entity, ...$current);
@@ -50,16 +50,16 @@ final class LoopGen
         }
 
         while (true) {
-            $iteration++;
+            $index++;
             $current = $next + $extraParams;
             $next = next($elements);
             if ($next === false) {
-                yield new Loop(false, true, $iteration) => $factory($entity, ...$current);
+                yield new Loop(false, true, $index) => $factory($entity, ...$current);
 
                 return;
             }
 
-            yield new Loop(false, false, $iteration) => $factory($entity, ...$current);
+            yield new Loop(false, false, $index) => $factory($entity, ...$current);
         }
     }
 

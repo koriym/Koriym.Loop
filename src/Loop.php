@@ -15,16 +15,20 @@ final class Loop
     /** @var bool */
     public $isLast;
 
+    /** @var int  */
+    private int $index;
+
     /** @var int */
     public $iteration;
 
     public function __construct(
         bool $isFirst,
         bool $isLast,
-        int $iteration
+        int $index
     ) {
         $this->isFirst = $isFirst;
         $this->isLast = $isLast;
-        $this->iteration = $iteration;
+        $this->index = $index;
+        $this->iteration = $index + 1;
     }
 }
