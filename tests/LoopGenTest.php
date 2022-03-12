@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Koriym\Loop;
 
+use ArrayIterator;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 
@@ -23,12 +24,28 @@ class LoopGenTest extends TestCase
         ];
     }
 
-    public function testInvoke(): void
+    /**
+     * @return array<array<string>>|ArrayIterator<array<string>>
+     */
+    public function dataProvider(): iterable
+    {
+        return [
+            $this->resultSet,
+            new ArrayIterator($this->resultSet),
+        ];
+    }
+
+    /**
+     * @param  array<array<string>>|ArrayIterator<array<string>> $resultSet
+     *
+     * @dataProvider dataProvider
+     */
+    public function testInvoke(iterable $resultSet): void
     {
         /** @var LoopGen<FakeUser> $list */
-        $index = [];
-        $iteration = [];
-        $list = (new LoopGen())($this->resultSet, FakeUser::class);
+        $indexList = [];
+        $iterationList = [];
+        $list = (new LoopGen())($resultSet, FakeUser::class);
         foreach ($list as $loop => $user) {
             /** @var Loop $loop */
             $indexList[] = $loop->index;
@@ -47,7 +64,7 @@ class LoopGenTest extends TestCase
     {
         $list =  (new LoopGen())([], FakeUser::class);
         $item = null;
-        foreach ($list as $loop => $item) {
+        foreach ($list as $item) {
             assert($item instanceof FakeUser);
         }
 
@@ -65,14 +82,19 @@ class LoopGenTest extends TestCase
         $this->assertTrue($loop->isLast);
     }
 
-    public function testExtraParams(): void
+    /**
+     * @param  array<array<string>>|ArrayIterator<array<string>> $resultSet
+     *
+     * @dataProvider dataProvider
+     */
+    public function testExtraParams(iterable $resultSet): void
     {
         $list = (new LoopGen())(
-            $this->resultSet,
+            $resultSet,
             FakeUser::class,
             ['date' => new DateTime('now')]
         );
-        foreach ($list as $loop => $item) {
+        foreach ($list as $item) {
             $this->assertInstanceOf(DateTime::class, $item->date);
         }
     }
