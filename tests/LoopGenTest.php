@@ -36,6 +36,8 @@ class LoopGenTest extends TestCase
     }
 
     /**
+     * @param  array<array<string>>|ArrayIterator<array<string>> $resultSet
+     *
      * @dataProvider dataProvider
      */
     public function testInvoke(iterable $resultSet): void
@@ -81,6 +83,8 @@ class LoopGenTest extends TestCase
     }
 
     /**
+     * @param  array<array<string>>|ArrayIterator<array<string>> $resultSet
+     *
      * @dataProvider dataProvider
      */
     public function testExtraParams(iterable $resultSet): void
