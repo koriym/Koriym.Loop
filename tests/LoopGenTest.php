@@ -27,7 +27,7 @@ class LoopGenTest extends TestCase
     /**
      * @return array<array<string>>|ArrayIterator<array<string>>
      */
-    public function dataProvider(): array
+    public function dataProvider(): iterable
     {
         return [
             $this->resultSet,
