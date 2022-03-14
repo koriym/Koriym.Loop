@@ -21,7 +21,7 @@ $resultSet = [
     ['id' => 3, 'name' => 'alps'],
 ];
 
-/** @var list<User> $userList */
+/** @var list<User> $users */
 $users = (new LoopGen)($resultSet, User::class);
 foreach ($users as $user) {
     echo $user->name;
