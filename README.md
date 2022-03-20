@@ -21,7 +21,7 @@ $resultSet = [
     ['id' => 3, 'name' => 'alps'],
 ];
 
-/** @var Generator<Loop, T, mixed, void> $users */
+/** @var Generator<Loop, User, mixed, void> $users */
 $users = (new LoopGen)($resultSet, User::class);
 foreach ($users as $user) {
     echo $user->name;
