@@ -20,6 +20,10 @@ final class LoopGen
 {
     // phpcs:disable
     /**
+     * This function generates a loop for the given elements. It takes an iterator or an array of elements,
+     * a class-string entity, an optional array of extra parameters, and an optional factory callable.
+     * It returns a generator that yields a new Loop object for each element.
+     *
      * @param Iterator<array-key, array<string, mixed>>|array<array<string, mixed>>  $elements
      * @param class-string<T>              $entity
      * @param array<string, mixed>         $extraParams
