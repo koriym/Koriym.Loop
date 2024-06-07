@@ -12,26 +12,28 @@ use function assert;
 
 class LoopGenTest extends TestCase
 {
-    /** @var array<array<scalar>> */
-    protected $resultSet;
-
-    protected function setUp(): void
-    {
-        $this->resultSet = [
-            ['id' => 1, 'name' => 'ray'],
-            ['id' => 2, 'name' => 'di'],
-            ['id' => 3, 'name' => 'aop'],
-        ];
-    }
-
     /**
+     * Provide array or ArrayIterator
+     *
      * @return array<array<string>>|ArrayIterator<array<string>>
      */
     public function dataProvider(): iterable
     {
         return [
-            $this->resultSet,
-            new ArrayIterator($this->resultSet),
+            [
+                [
+                    ['id' => 1, 'name' => 'ray'],
+                    ['id' => 1, 'name' => 'ray'],
+                    ['id' => 1, 'name' => 'ray'],
+                ],
+            ],
+            [
+                new ArrayIterator([
+                    ['id' => 1, 'name' => 'ray'],
+                    ['id' => 1, 'name' => 'ray'],
+                    ['id' => 1, 'name' => 'ray'],
+                ]),
+            ],
         ];
     }
 
