@@ -41,30 +41,18 @@ final class LoopGen
         }
 
         $elements = is_array($elements) ? new ArrayIterator($elements) : $elements;
-        $factory = $factory ?? [$this, 'newEntity'];
-        $index = 0;
-        $current = $elements->current() + $extraParams;
-        $elements->next();
-        if (! $elements->valid()) {
-            yield new Loop(true, true, $index) => $factory($entity, $current);
-
-            return;
-        }
-
-        yield new Loop(true, false, $index) => $factory($entity, $current);
-
-        $elements->next();
-        $index++;
+                 $factory = $factory ?? [$this, 'newEntity'];
+                 $index = 0;
         while ($elements->valid()) {
             $current = $elements->current() + $extraParams;
+            $isFirst = $index === 0;
             $elements->next();
+            $isLast = ! $elements->valid();
 
-            yield new Loop(false, false, $index) => $factory($entity, $current);
+            yield new Loop($isFirst, $isLast, $index) => $factory($entity, $current);
 
             $index++;
         }
-
-        yield new Loop(false, true, $index) => $factory($entity, $current);
     }
 
     /**
