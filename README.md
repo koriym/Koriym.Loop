@@ -62,6 +62,7 @@ $dependencies = [
 ];
 $users = (new LoopGen)($resultSet, User::class, $dependencies);
 ```
+
 ## Iterator
 
 Iterator is supported as well as array.
