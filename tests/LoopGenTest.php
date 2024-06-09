@@ -100,4 +100,14 @@ class LoopGenTest extends TestCase
             $this->assertInstanceOf(DateTime::class, $item->date);
         }
     }
+
+    public function testEmptySets(): void
+    {
+        $list = (new LoopGen())(
+            [],
+            FakeUser::class,
+            ['date' => new DateTime('now')]
+        );
+        $this->assertCount(0, $list);
+    }
 }
