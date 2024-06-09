@@ -1,10 +1,12 @@
 # Koriym.Loop
 
-Converts database result sets into an entity list generator that is handy to use in views.
-
-The entity list can be iterated with information provided such as `isFirst`, `isLast`, etc. It provides similar functionality for native PHP as the loop processing provided by template engines such as Smarty and Twig.
+Koriym.Loop is a PHP library that converts various iterable data sets, such as database result sets, CSV files, or any other iterable structures, into an entity list generator. This makes it easy to use in views by providing looping information such as isFirst, isLast, index, and iteration, similar to the loop processing found in template engines like Twig.
 
 ## Usage
+
+## Basic Example
+
+The following example demonstrates how to use Koriym.Loop with a simple User class and a result set:
 
 ```php
 class User
@@ -15,7 +17,8 @@ class User
     ){}
 }
 
-$resultSet = [
+// Database result sets or csv content
+$resultSet = [ 
     ['id' => 1, 'name' => 'ray'],
     ['id' => 2, 'name' => 'bear'],
     ['id' => 3, 'name' => 'alps'],
@@ -28,7 +31,9 @@ foreach ($users as $user) {
 }
 ```
 
-Loop information is obtained from the array keys.
+### Loop information
+
+Loop information can be accessed from the array keys, providing details such as whether the current item is the first or last in the list:
 
 ```php
 /** @var Loop $loop */
@@ -42,7 +47,7 @@ foreach ($users as $loop => $user) {
 }
 ```
 
-`Loop`
+### Loop Properties
 
 | property  | type | Description            |
 | --------- | ---- | ---------------------- |
@@ -63,15 +68,31 @@ $dependencies = [
 $users = (new LoopGen)($resultSet, User::class, $dependencies);
 ```
 
-## Iterator
+## Iterator Support
 
-Iterator is supported as well as array.
+Koriym.Loop supports iterators as well as arrays. Here's an example using a CSV iterator:
 
 ```php
+class Row
+{
+    public function __construct(
+        public readonly int $id,
+        public readonly string $name
+    ){}
+}
+
+// Retrieve contents of csv file as list<Row>
 $csvIterator = new ogrrd\CsvIterator\CsvIterator($csvFilePath);
-/** @var list<User> $userList */
+/** @var list<Row> $csvRowList */
 $csvRowList = (new LoopGen)($csvIterator, Row::class);
-foreach ($csvRowList as $row) {
+
+foreach ($csvRowList as $loop => $row) {
+    if ($loop->isFirst) {
+        continue; // Skip header
+    }
     echo $row->name;
 }
 ```
+
+This library provides a flexible and convenient way to handle looping through result sets and other iterable data structures in PHP, with additional context information about the loop's state.
+
