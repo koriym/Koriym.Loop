@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Koriym\Loop;
 
+use ArrayIterator;
 use Generator;
+use Iterator;
 
 use function array_values;
-use function current;
-use function next;
+use function is_array;
 
 use const PHP_MAJOR_VERSION;
 
@@ -19,7 +20,11 @@ final class LoopGen
 {
     // phpcs:disable
     /**
-     * @param array<array<string, mixed>>  $elements
+     * This function generates a loop for the given elements. It takes an iterator or an array of elements,
+     * a class-string entity, an optional array of extra parameters, and an optional factory callable.
+     * It returns a generator that yields a new Loop object for each element.
+     *
+     * @param Iterator<array-key, array<string, mixed>>|array<array<string, mixed>>  $elements
      * @param class-string<T>              $entity
      * @param array<string, mixed>         $extraParams
      * @param callable(class-string, mixed...):T $factory
@@ -30,7 +35,7 @@ final class LoopGen
      */
     public function __invoke(
         // phpcs:enable
-        array $elements,
+        $elements,
         string $entity,
         array $extraParams = [],
         ?callable $factory = null
@@ -39,30 +44,18 @@ final class LoopGen
             return;
         }
 
-        $factory = $factory ?? [$this, 'newEntity'];
-        $index = 0;
-        $current = current($elements) + $extraParams;
-        $next = next($elements);
-        $loop = $next ? new Loop(true, false, $index) : new Loop(true, true, $index);
+        $elements = is_array($elements) ? new ArrayIterator($elements) : $elements;
+                 $factory = $factory ?? [$this, 'newEntity'];
+                 $index = 0;
+        while ($elements->valid()) {
+            $current = $elements->current() + $extraParams;
+            $isFirst = $index === 0;
+            $elements->next();
+            $isLast = ! $elements->valid();
 
-        // first loop
-        yield $loop => $factory($entity, $current);
+            yield new Loop($isFirst, $isLast, $index) => $factory($entity, $current);
 
-        if (! $next) {
-            return;
-        }
-
-        while (true) {
             $index++;
-            $current = $next + $extraParams;
-            $next = next($elements);
-            if ($next === false) {
-                yield new Loop(false, true, $index) => $factory($entity, $current);
-
-                return;
-            }
-
-            yield new Loop(false, false, $index) => $factory($entity, $current);
         }
     }
 

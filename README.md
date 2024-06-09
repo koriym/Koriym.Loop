@@ -63,3 +63,15 @@ $dependencies = [
 $users = (new LoopGen)($resultSet, User::class, $dependencies);
 ```
 
+## Iterator
+
+Iterator is supported as well as array.
+
+```php
+$csvIterator = new ogrrd\CsvIterator\CsvIterator($csvFilePath);
+/** @var list<User> $userList */
+$csvRowList = (new LoopGen)($csvIterator, Row::class);
+foreach ($csvRowList as $row) {
+    echo $row->name;
+}
+```
