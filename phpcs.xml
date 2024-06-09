@@ -40,6 +40,7 @@
     </rule>
     <!-- Additional Rules -->
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamName" />
         <properties>
             <property name="annotationsGroups" type="array">
                 <element value="@param, @psalm-param, @phpstan-param"/>
