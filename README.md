@@ -2,6 +2,12 @@
 
 Koriym.Loop is a PHP library that converts various iterable data sets, such as database result sets, CSV files, or any other iterable structures, into an entity list generator. This makes it easy to use in views by providing looping information such as isFirst, isLast, index, and iteration, similar to the loop processing found in template engines like Twig.
 
+## Installation
+
+```bash
+composer require koriym/loop
+```
+
 ## Usage
 
 ## Basic Example
