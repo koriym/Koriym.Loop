@@ -55,7 +55,7 @@ final class LoopGen implements LoopGenInterface
      *
      * @return T
      *
-     * @SuppressWarnings("UnusedPrivateMethod")
+     * @SuppressWarnings("UnusedPrivateMethod") // This method is used in the __invoke method
      */
     private function newEntity(string $entity, array $elements)
     {
