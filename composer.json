@@ -1,6 +1,6 @@
 {
     "name": "koriym/loop",
-    "description": "",
+    "description": "Converts iterable data sets (e.g., database results, CSV files) into an entity list generator with loop context (isFirst, isLast, index, iteration).",
     "license": "MIT",
     "authors": [
         {
