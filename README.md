@@ -1,5 +1,9 @@
 # Koriym.Loop
 
+[![codecov](https://codecov.io/gh/koriym/Koriym.Loop/branch/master/graph/badge.svg?token=eh3c9AF4Mr)](https://codecov.io/gh/koriym/Koriym.Loop)
+[![Type Coverage](https://shepherd.dev/github/koriym/Koriym.Loop/coverage.svg)](https://shepherd.dev/github/koriym/Koriym.Loop)
+![Continuous Integration](https://github.com/koriym/Koriym.Loop/workflows/Continuous%20Integration/badge.svg)
+
 Koriym.Loop is a PHP library that converts various iterable data sets, such as database result sets, CSV files, or any other iterable structures, into an entity list generator. This makes it easy to use in views by providing looping information such as isFirst, isLast, index, and iteration, similar to the loop processing found in template engines like Twig.
 
 ## Installation
