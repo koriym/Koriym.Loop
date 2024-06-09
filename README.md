@@ -73,7 +73,8 @@ Specify the key as the name of the parameter and the value as the instance.
 
 ```php
 $dependencies = [
-    $varName => $insntance
+    $varName => $insntance,
+    'dateTime' => new DateTime(), // DateTime instance is injected
 ];
 $users = (new LoopGen)($resultSet, User::class, $dependencies);
 ```
