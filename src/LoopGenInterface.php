@@ -23,8 +23,6 @@ interface LoopGenInterface
      * @param callable(class-string, mixed...):T                                    $factory
      *
      * @return Generator<Loop, T, mixed, void>
-     *
-     * @psalm-suppress ImplementedReturnTypeMismatch
      */
     public function __invoke($elements, string $entity, array $extraParams = [], ?callable $factory = null): Generator;
 }

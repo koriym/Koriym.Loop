@@ -55,7 +55,6 @@ final class LoopGen implements LoopGenInterface
      *
      * @return T
      *
-     * @psalm-suppress MixedMethodCall
      * @SuppressWarnings("UnusedPrivateMethod")
      */
     private function newEntity(string $entity, array $elements)
@@ -64,6 +63,7 @@ final class LoopGen implements LoopGenInterface
             $elements = array_values($elements);
         }
 
+        /** @psalm-suppress MixedMethodCall */
         return new $entity(...$elements);
     }
 }
